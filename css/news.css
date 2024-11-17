@@ -146,20 +146,32 @@ footer>p {
 
 /* Запросы */
 @media (min-width: 768px) {
+    .head {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
     nav {
-        grid-template-columns: 1fr 90%;
+        grid-template-columns: 1fr;
     }
 
     .navig {
-        flex-direction: row;
-        justify-content: flex-end;
+        flex-direction: column;
+        justify-content: center;
+        padding-top: 20px;
     }
 
     .navig>li>a {
-        font-size: 18px;
-        margin-left: 45px;
-        margin-bottom: 0;
+        margin-left: 0;
+        margin-bottom: 10px;
+        font-size: 20px;
     }
+
+    nav>a>img {
+        width: 50px;
+        margin-bottom: 10px;
+    }
+
 
     .text>p {
         font-size: 24px;
@@ -182,11 +194,6 @@ footer>p {
 
     .content {
         flex-direction: row;
-    }
-
-    .head {
-        padding-left: 8%;
-        padding-right: 8%;
     }
 
     .news {
