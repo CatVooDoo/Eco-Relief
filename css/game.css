@@ -209,3 +209,90 @@ footer > p {
     padding-top: 45px;
     font-family: 'Roboto'; 
 }
+
+@media (max-width: 768px) {
+    nav {
+        grid-template-columns: 1fr;
+    }
+
+    .navig {
+        flex-direction: column;
+        justify-content: center;
+        padding-top: 20px;
+    }
+
+    .navig>li>a {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    nav>a>img {
+        width: 50px;
+        margin-bottom: 10px;
+    }
+
+    .boxes {
+        grid-template-columns: 1fr;
+    }
+
+    .boxes img {
+        width: 200px;
+        margin-left: 0;
+    }
+
+    .box {
+        width: auto;
+        margin: 20px auto;
+    }
+
+    .box2 {
+        height: auto;
+    }
+
+    .number {
+        font-size: 60px;
+    }
+
+    .box p {
+        font-size: 20px;
+    }
+
+    .merch {
+        padding: 10px;
+    }
+
+    .pin,
+    .stickers {
+        width: auto;
+        margin: 10px auto;
+    }
+
+    .merch h3 {
+        font-size: 20px;
+    }
+
+    .merch p {
+        font-size: 16px;
+    }
+
+    .game h1,
+    .game h3 {
+        font-size: 36px;
+        padding-top: 30px;
+    }
+
+    .game img {
+        width: 200px;
+    }
+
+    .game p {
+        font-size: 18px;
+    }
+
+    .head,
+    .game,
+    footer {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+}
