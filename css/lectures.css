@@ -114,3 +114,39 @@ footer > p {
     padding-top: 45px;
     font-family: 'Roboto'; 
 }
+
+@media (max-width: 768px) {
+    .head {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+    nav {
+        grid-template-columns: 1fr;
+    }
+    .navig {
+        flex-direction: column;
+        justify-content: center;
+        padding-top: 20px;
+    }
+    .navig > li > a {
+        margin-left: 0;
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+    nav > a > img {
+        width: 50px;
+        margin-bottom: 10px;
+    }
+    .lectures > h1 {
+        font-size: 36px;
+    }
+    .lectures > h2 {
+        font-size: 30px;
+    }
+    .lectures > h3 {
+        font-size: 28px;
+    }
+    footer > p {
+        font-size: 11px;
+    }
+}
