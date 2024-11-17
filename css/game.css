@@ -1,0 +1,211 @@
+@font-face {
+	font-family: 'Roboto'; 
+	src: url(../fonts/Roboto.ttf); 
+}
+
+
+@font-face {
+	font-family: 'Piazzolla'; 
+	src: url(../fonts/Piazzolla.ttf); 
+}
+
+
+body {
+    margin:0px;
+}
+
+.head {
+    background-color: #FFFFFF;
+    padding-left: 8%;
+    padding-right: 8%;
+    margin-bottom: 5px;
+} 
+
+nav {
+    display: grid;
+	grid-template-columns: 1fr 90%;
+    
+}
+
+
+.navig{
+    display: flex;
+    justify-content: right;
+    border-bottom: solid 2px;
+	border-color: #A3A3A3;
+	padding-top: 50px;
+    padding-bottom: 8px;
+    padding-right: 10px;
+}
+
+.navig>li>a{
+    font-size: 18px;
+    color: #8FBD88;
+    margin-left: 45px;
+    text-decoration: none;
+    font-family: 'Roboto'; 
+}
+
+.navig>li>a:hover {
+    color: #67705C;
+}
+
+.navig>li {
+    list-style: none;
+}
+
+nav>a>img {
+    width: 85px;
+    
+}
+
+.game {
+    background-color: #F3FFE4;
+    padding-left: 8%;
+    padding-right: 8%;
+    padding-bottom: 50px;
+    padding-top: 20px;
+}
+
+.content {
+    display: flex;
+}
+
+
+.game>h1 {
+    color: #2D492C;
+    font-size: 48px;
+    font-weight: bold;
+    text-align: left;
+    margin: 0px;
+	padding-top: 70px;
+    font-family: 'Piazzolla'; 
+    margin-bottom: 50px;
+}
+
+
+.boxes {
+    display: grid;
+  grid-template-columns: 450px 450px;
+  grid-template-rows: 1fr 1fr auto;
+  justify-content: center;
+  align-content: center;
+}
+
+.boxes img {
+    width: 250px;
+    margin-left: 50px;
+}
+
+.box {
+    width: 350px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+    border-left: solid 8px #8FBD88;
+    padding: 20px;
+    padding-bottom: 40px;
+    background-color: #FFFFFF;
+    margin: 40px 0px 20px 0px;
+  }
+
+  .box2 {
+    height: 120px;
+  }
+
+  .number {
+    font-family: 'Roboto';
+    font-size: 90px;
+    margin: 0px;
+    color: #80A77A;
+  }
+
+  .box p {
+    font-family: 'Roboto';
+    font-size: 32px;
+    margin: 0px;
+    color: #2D492C;
+    text-align: left;
+    font-family: 'Piazzolla'; 
+    font-weight: bold;
+
+  }
+
+.merch {
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    padding-bottom: 40px;
+    background-color: #8FBD88;
+    text-align: center;
+}
+
+.pin {
+    width: 150px;
+}
+
+.stickers {
+    width: 300px;
+    margin-top: 50px;
+}
+
+.merch h3 {
+    font-family: 'Roboto';
+    font-size: 30px;
+    margin: 0px;
+    color: #2D492C;
+    text-align: center;
+    font-family: 'Piazzolla'; 
+    font-weight: bold;
+}
+
+.merch p {
+    font-family: 'Roboto';
+    font-size: 20px;
+    margin: 0px;
+    color: #F3FFE4;
+    text-align: center;
+    font-family: 'Piazzolla'; 
+}
+
+.game>h3 {
+    color: #2D492C;
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0px;
+	padding-top: 70px;
+    font-family: 'Piazzolla'; 
+    margin-bottom: 50px;
+}
+
+.game>img {
+    width: 300px;
+    text-align: center;
+
+}
+.game>p {
+    font-family: 'Roboto';
+    font-size: 25px;
+    margin: 0px;
+    color: #2D492C;
+    text-align: center;
+    font-family: 'Piazzolla'; 
+
+}
+
+
+
+footer {
+    background-color: #FFFFFF;
+    padding-left: 8%;
+    padding-right: 8%;
+    height: 70px;
+    text-align: center;
+}
+
+footer > p {
+    font-size: 13px;
+    color: #535353;
+    padding-top: 45px;
+    font-family: 'Roboto'; 
+}
