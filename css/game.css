@@ -1,17 +1,17 @@
 @font-face {
-	font-family: 'Roboto'; 
-	src: url(../fonts/Roboto.ttf); 
+    font-family: 'Roboto';
+    src: url(../fonts/Roboto.ttf);
 }
 
 
 @font-face {
-	font-family: 'Piazzolla'; 
-	src: url(../fonts/Piazzolla.ttf); 
+    font-family: 'Piazzolla';
+    src: url(../fonts/Piazzolla.ttf);
 }
 
 
 body {
-    margin:0px;
+    margin: 0px;
 }
 
 .head {
@@ -19,31 +19,31 @@ body {
     padding-left: 8%;
     padding-right: 8%;
     margin-bottom: 5px;
-} 
+}
 
 nav {
     display: grid;
-	grid-template-columns: 1fr 90%;
-    
+    grid-template-columns: 1fr 90%;
+
 }
 
 
-.navig{
+.navig {
     display: flex;
     justify-content: right;
     border-bottom: solid 2px;
-	border-color: #A3A3A3;
-	padding-top: 50px;
+    border-color: #A3A3A3;
+    padding-top: 50px;
     padding-bottom: 8px;
     padding-right: 10px;
 }
 
-.navig>li>a{
+.navig>li>a {
     font-size: 18px;
     color: #8FBD88;
     margin-left: 45px;
     text-decoration: none;
-    font-family: 'Roboto'; 
+    font-family: 'Roboto';
 }
 
 .navig>li>a:hover {
@@ -56,7 +56,7 @@ nav {
 
 nav>a>img {
     width: 85px;
-    
+
 }
 
 .game {
@@ -78,18 +78,18 @@ nav>a>img {
     font-weight: bold;
     text-align: left;
     margin: 0px;
-	padding-top: 70px;
-    font-family: 'Piazzolla'; 
+    padding-top: 70px;
+    font-family: 'Piazzolla';
     margin-bottom: 50px;
 }
 
 
 .boxes {
     display: grid;
-  grid-template-columns: 450px 450px;
-  grid-template-rows: 1fr 1fr auto;
-  justify-content: center;
-  align-content: center;
+    grid-template-columns: 450px 450px;
+    grid-template-rows: 1fr 1fr auto;
+    justify-content: center;
+    align-content: center;
 }
 
 .boxes img {
@@ -106,29 +106,29 @@ nav>a>img {
     padding-bottom: 40px;
     background-color: #FFFFFF;
     margin: 40px 0px 20px 0px;
-  }
+}
 
-  .box2 {
+.box2 {
     height: 120px;
-  }
+}
 
-  .number {
+.number {
     font-family: 'Roboto';
     font-size: 90px;
     margin: 0px;
     color: #80A77A;
-  }
+}
 
-  .box p {
+.box p {
     font-family: 'Roboto';
     font-size: 32px;
     margin: 0px;
     color: #2D492C;
     text-align: left;
-    font-family: 'Piazzolla'; 
+    font-family: 'Piazzolla';
     font-weight: bold;
 
-  }
+}
 
 .merch {
     border-radius: 10px;
@@ -154,7 +154,7 @@ nav>a>img {
     margin: 0px;
     color: #2D492C;
     text-align: center;
-    font-family: 'Piazzolla'; 
+    font-family: 'Piazzolla';
     font-weight: bold;
 }
 
@@ -164,7 +164,7 @@ nav>a>img {
     margin: 0px;
     color: #F3FFE4;
     text-align: center;
-    font-family: 'Piazzolla'; 
+    font-family: 'Piazzolla';
 }
 
 .game>h3 {
@@ -173,8 +173,8 @@ nav>a>img {
     font-weight: bold;
     text-align: center;
     margin: 0px;
-	padding-top: 70px;
-    font-family: 'Piazzolla'; 
+    padding-top: 70px;
+    font-family: 'Piazzolla';
     margin-bottom: 50px;
 }
 
@@ -183,13 +183,14 @@ nav>a>img {
     text-align: center;
 
 }
+
 .game>p {
     font-family: 'Roboto';
     font-size: 25px;
     margin: 0px;
     color: #2D492C;
     text-align: center;
-    font-family: 'Piazzolla'; 
+    font-family: 'Piazzolla';
 
 }
 
@@ -203,11 +204,11 @@ footer {
     text-align: center;
 }
 
-footer > p {
+footer>p {
     font-size: 13px;
     color: #535353;
     padding-top: 45px;
-    font-family: 'Roboto'; 
+    font-family: 'Roboto';
 }
 
 @media (max-width: 768px) {
@@ -248,6 +249,10 @@ footer > p {
     .box2 {
         height: auto;
     }
+    
+    .box1 {
+       margin-bottom: -65px;
+    }
 
     .number {
         font-size: 60px;
@@ -255,10 +260,6 @@ footer > p {
 
     .box p {
         font-size: 20px;
-    }
-
-    .merch {
-        padding: 10px;
     }
 
     .pin,
@@ -294,5 +295,9 @@ footer > p {
     footer {
         padding-left: 5%;
         padding-right: 5%;
+    }
+
+    .arrow {
+        display: none;
     }
 }
