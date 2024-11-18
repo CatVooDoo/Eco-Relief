@@ -28,12 +28,12 @@ const span2 = document.getElementById("closeModal2");
 
 // При нажатии на кнопку открываем модальное окно
 btn2.onclick = function() {
-    modal1.style.display = "block";
+    modal2.style.display = "block";
 }
 
 // При нажатии на элемент <span> (x) закрываем модальное окно
 span2.onclick = function() {
-    modal1.style.display = "none";
+    modal2.style.display = "none";
 }
 
 // При нажатии в любое место вне модального окна закрываем его
