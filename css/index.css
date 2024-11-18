@@ -350,7 +350,6 @@ footer>p {
 
 
 @media (max-width: 768px) {
-
     .head {
         padding-left: 5%;
         padding-right: 5%;
@@ -392,11 +391,6 @@ footer>p {
         background-size: cover;
     }
 
-    .about-us>img {
-        width: 100%;
-        padding: 20px 0;
-    }
-
     .we>h1 {
         padding-left: 20px;
         font-size: 36px;
@@ -415,4 +409,17 @@ footer>p {
         width: 90%;
     }
 
+    .maskot__img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        margin-bottom: -80px;
+    }
+
+    .maskot {
+        width: 50%;
+        height: auto;
+        padding: 20px 0;
+    }
 }
