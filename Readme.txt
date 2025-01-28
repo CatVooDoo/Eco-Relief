@@ -1,137 +1,100 @@
-from flask import Flask, render_template, redirect, url_for, request, flash
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, TextAreaField
-from wtforms.validators import DataRequired, Length
-from datetime import datetime
-
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'supersecretkey123'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///eduportal.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-# Инициализация расширений
-db = SQLAlchemy()
-login_manager = LoginManager()
-login_manager.login_view = 'login'
-
-db.init_app(app)
-login_manager.init_app(app)
-
-# Модели данных
-class User(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    password = db.Column(db.String(200), nullable=False)
-    is_teacher = db.Column(db.Boolean, default=False)
-    materials_viewed = db.relationship('MaterialView', backref='student', lazy=True)
-
-class Material(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(150), nullable=False)
-    content = db.Column(db.Text, nullable=False)
-    teacher_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    views = db.relationship('MaterialView', backref='material', lazy=True)
-
-class MaterialView(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    student_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    material_id = db.Column(db.Integer, db.ForeignKey('material.id'), nullable=False)
-    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
-
-class Test(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(150), nullable=False)
-    questions = db.Column(db.Text)  # JSON в реальном проекте использовать лучше отдельную таблицу
-    teacher_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
-# Формы
-class LoginForm(FlaskForm):
-    username = StringField('Логин', validators=[DataRequired()])
-    password = PasswordField('Пароль', validators=[DataRequired()])
-    submit = SubmitField('Войти')
-
-class MaterialForm(FlaskForm):
-    title = StringField('Название', validators=[DataRequired(), Length(max=150)])
-    content = TextAreaField('Содержание', validators=[DataRequired()])
-    submit = SubmitField('Создать')
-
-# Логика авторизации
-@login_manager.user_loader
-def load_user(user_id):
-    return db.get_or_404(User, user_id)
-
-# Маршруты
-@app.route('/')
-def home():
-    return render_template('base.html')
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        if user and user.password == form.password.data:  # В реальном проекте использовать хеширование!
-            login_user(user)
-            return redirect(url_for('dashboard'))
-        flash('Неверный логин или пароль')
-    return render_template('login.html', form=form)
-
-@app.route('/dashboard')
-@login_required
-def dashboard():
-    if current_user.is_teacher:
-        materials = Material.query.filter_by(teacher_id=current_user.id).all()
-        return render_template('teacher_dashboard.html', materials=materials)
-    else:
-        materials = Material.query.all()
-        return render_template('student_dashboard.html', materials=materials)
-
-@app.route('/material/<int:id>')
-@login_required
-def view_material(id):
-    material = db.get_or_404(Material, id)
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPortal - {% block title %}{% endblock %}</title>
     
-    if not current_user.is_teacher:
-        # Фиксируем просмотр
-        view = MaterialView(student_id=current_user.id, material_id=id)
-        db.session.add(view)
-        db.session.commit()
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    return render_template('material.html', material=material)
-
-@app.route('/create-material', methods=['GET', 'POST'])
-@login_required
-def create_material():
-    if not current_user.is_teacher:
-        return redirect(url_for('dashboard'))
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     
-    form = MaterialForm()
-    if form.validate_on_submit():
-        material = Material(
-            title=form.title.data,
-            content=form.content.data,
-            teacher_id=current_user.id
-        )
-        db.session.add(material)
-        db.session.commit()
-        return redirect(url_for('dashboard'))
-    return render_template('create_material.html', form=form)
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <!-- Навигационная панель -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-lg">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('home') }}">
+                <i class="fas fa-graduation-cap me-2"></i>EduPortal
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    {% if current_user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('dashboard') }}">
+                                <i class="fas fa-home me-1"></i>Личный кабинет
+                            </a>
+                        </li>
+                        {% if current_user.is_teacher %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('create_material') }}">
+                                <i class="fas fa-plus-circle me-1"></i>Создать материал
+                            </a>
+                        </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('logout') }}">
+                                <i class="fas fa-sign-out-alt me-1"></i>Выход
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('login') }}">
+                                <i class="fas fa-sign-in-alt me-1"></i>Вход
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-@app.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for('home'))
+    <!-- Основной контент -->
+    <main class="flex-grow-1">
+        {% block content %}{% endblock %}
+    </main>
 
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template('404.html'), 404
+    <!-- Подвал -->
+    <footer class="bg-primary text-white mt-5 py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>О проекте</h5>
+                    <p>EduPortal - современная платформа для онлайн-образования. Учитесь в любое время, в любом месте!</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Контакты</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-envelope me-2"></i>support@eduportal.ru</li>
+                        <li><i class="fas fa-phone me-2"></i>8-800-555-35-35</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Соцсети</h5>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-3"><i class="fab fa-vk"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <p>&copy; 2024 EduPortal. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
 
-# Создание БД
-with app.app_context():
-    db.create_all()
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    <!-- Скрипты -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
