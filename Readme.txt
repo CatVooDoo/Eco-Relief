@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Вход</h1>
+<h1>Регистрация</h1>
 <form method="POST">
     {{ form.hidden_tag() }}
     <div>
@@ -11,6 +11,10 @@
         {{ form.password.label }}<br>
         {{ form.password(class="form-control") }}<br>
     </div>
-    <button type="submit" class="btn btn-primary w-100 mt-3">Войти</button>
+    <div>
+        {{ form.role.label }}<br>
+        {{ form.role(class="form-control") }}<br>
+    </div>
+    <button type="submit" class="btn btn-success w-100 mt-3">Зарегистрироваться</button>
 </form>
 {% endblock %}
