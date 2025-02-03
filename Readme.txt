@@ -1,16 +1,16 @@
-{% extends "base.html" %}
-{% block content %}
-<h1>Создать лекцию</h1>
-<form method="POST">
-    {{ form.hidden_tag() }}
-    <div>
-        {{ form.title.label }}<br>
-        {{ form.title(class="form-control") }}<br>
-    </div>
-    <div>
-        {{ form.content.label }}<br>
-        {{ form.content(class="form-control", rows=10) }}<br>
-    </div>
-    <button type="submit" class="btn btn-primary w-100 mt-3">Сохранить</button>
-</form>
-{% endblock %}
+<nav>
+    <ul>
+        <li><a href="{{ url_for('index') }}">Главная</a></li>
+        {% if current_user.is_authenticated %}
+        <li><a href="{{ url_for('dashboard') }}">Панель</a></li>
+        {% if current_user.role == 'teacher' %}
+        <li><a href="{{ url_for('create_lecture') }}">Лекция</a></li>
+        <li><a href="{{ url_for('create_test') }}">Тест</a></li>
+        {% endif %}
+        <li><a href="{{ url_for('logout') }}">Выйти</a></li>
+        {% else %}
+        <li><a href="{{ url_for('login') }}">Войти</a></li>
+        <li><a href="{{ url_for('register') }}">Регистрация</a></li>
+        {% endif %}
+    </ul>
+</nav>
